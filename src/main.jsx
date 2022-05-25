@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './styles/globalStyles.css'
 import { Register } from './pages/Register'
+import {HechoContaminacion} from './pages/HechoContaminacion'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/hecho-contaminacion' element={<HechoContaminacion />} />
     </Routes>
   </BrowserRouter>
 )
