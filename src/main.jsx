@@ -6,6 +6,7 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { LayoutContainer } from './layouts/LayoutContainer'
 import { HechoContaminacion } from './pages/HechoContaminacion'
+import { Registrohc } from './pages/Registrohc'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import './styles/globalStyles.css'
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/hecho-contaminacion' element={<HechoContaminacion />} />
+        <Route path='/Registro-hc' element={<Registrohc />} />
       </Routes>
     </LayoutContainer>
   </BrowserRouter>
