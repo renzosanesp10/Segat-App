@@ -1,7 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
-export const Navbar = ({ user = '' }) => {
+export const Navbar = () => {
+  const { user, objUser } = useContext(AuthContext)
+
   return (
     <nav
       className='navbar navbar-expand-lg navbar-dark bg-dark px-5 position-sticky top-0'
@@ -58,9 +61,13 @@ export const Navbar = ({ user = '' }) => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  {user}
+                  {user.uid}
                 </a>
-                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                <ul
+                  className='dropdown-menu'
+                  style={{ top: '35px', left: '-105px' }}
+                  aria-labelledby='navbarDropdown'
+                >
                   <li>
                     <a className='dropdown-item' href='#'>
                       Ayuda
@@ -70,7 +77,11 @@ export const Navbar = ({ user = '' }) => {
                     <hr className='dropdown-divider' />
                   </li>
                   <li>
-                    <a className='dropdown-item' href='#'>
+                    <a
+                      className='dropdown-item'
+                      type='button'
+                      onClick={() => objUser.signOut()}
+                    >
                       Cerrar sesión
                     </a>
                   </li>

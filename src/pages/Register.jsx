@@ -1,79 +1,126 @@
-import React from 'react'
-import '../styles/register.css'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-export const Register = () => {
-  return (
-    <div className='contenedor'>
-      <div className='w-50 card'>
-        <div className='card-header text-center'>
-          <h2>Registro</h2>
-        </div>
+import { Card } from '../components/Card'
+import { AuthContext } from '../context/AuthContext'
 
-        <div className='card-body'>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput1' className='form-label'>
-              Nombres y Apellidos
-            </label>
-            <input
-              type='text'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='Juan Medina'
-            />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput' className='form-label'>
-              Dni
-            </label>
-            <input
-              type='text'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='71986383'
-            />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput' className='form-label'>
-              Correo Electronico
-            </label>
-            <input
-              type='email'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='correo@example.com'
-            />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput' className='form-label'>
-              Celular
-            </label>
-            <input
-              type='text'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='999666999'
-            />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput1' className='form-label'>
-              Contraseña
-            </label>
-            <input
-              type='password'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='******'
-            />
-          </div>
-          <div className='mb-3 d-flex justify-content-center'>
-            <button className='btn btn-primary'>Registrarse</button>
-          </div>
-          <div className='card-footer d-flex justify-content-center align-items-center gap-2'>
-            <p className='m-0'>¿Ya tienes una cuenta?</p>
-            <Link to='/login'>Iniciar Sesion</Link>
-          </div>
-        </div>
+export const Register = () => {
+  const { user, setUser, objUser } = useContext(AuthContext)
+  const [registerInfo, setRegisterInfo] = useState({
+    name: '',
+    surname: '',
+    dni: '',
+    email: '',
+    phone: '',
+    password: ''
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setRegisterInfo({ ...registerInfo, [name]: value })
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      objUser.setData(registerInfo)
+      const userCredential = await objUser.register()
+      console.log(userCredential)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return (
+    <div className='container_background'>
+      <div className='w-50'>
+        <Card
+          header={<h2 className='text-center'>Registro</h2>}
+          footer={
+            <div className='d-flex justify-content-center align-items-center gap-2'>
+              <p className='m-0'>¿Ya tienes una cuenta?</p>
+              <Link to='/login'>Iniciar Sesion</Link>
+            </div>
+          }
+        >
+          <form onSubmit={handleSubmit}>
+            <div className='row mb-3'>
+              <label className='col-6 form-label'>
+                Nombres
+                <input
+                  type='text'
+                  name='name'
+                  placeholder='Nombres'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={registerInfo.name}
+                />
+              </label>
+              <label className='col-6 form-label'>
+                Apellidos
+                <input
+                  type='text'
+                  name='surname'
+                  placeholder='Apellidos'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={registerInfo.surname}
+                />
+              </label>
+            </div>
+            <div className='row mb-3'>
+              <label className='col-6 form-label'>
+                Dni
+                <input
+                  type='text'
+                  name='dni'
+                  placeholder='71986383'
+                  onChange={handleChange}
+                  className='form-control'
+                  value={registerInfo.dni}
+                />
+              </label>
+              <label className='col-6 form-label'>
+                Correo Electronico
+                <input
+                  type='email'
+                  name='email'
+                  onChange={handleChange}
+                  className='form-control'
+                  value={registerInfo.email}
+                  placeholder='correo@example.com'
+                />
+              </label>
+            </div>
+            <div className='row mb-3'>
+              <label className='col-6 form-label'>
+                Celular
+                <input
+                  type='text'
+                  name='phone'
+                  placeholder='999666999'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={registerInfo.phone}
+                />
+              </label>
+              <label className='col-6 form-label'>
+                Contraseña
+                <input
+                  type='password'
+                  name='password'
+                  placeholder='******'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={registerInfo.password}
+                />
+              </label>
+            </div>
+            <div className='mb-3 d-flex justify-content-center'>
+              <button className='btn btn-primary w-50'>Registrarse</button>
+            </div>
+          </form>
+        </Card>
       </div>
     </div>
   )

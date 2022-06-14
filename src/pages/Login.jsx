@@ -1,15 +1,20 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/login.css'
+
+import { Card } from '../components/Card'
 
 export const Login = () => {
   return (
-    <div className='contenedor'>
-      <div className='w-25 card'>
-        <div className='card-header text-center'>
-          <h2>Inicio de Sesión</h2>
-        </div>
-        <div className='card-body'>
+    <div className='container_background'>
+      <div className='w-25'>
+        <Card
+          header={<h2 className='text-center'>Inicio de Sesión</h2>}
+          footer={
+            <div className='d-flex justify-content-center align-items-center gap-2'>
+              <p className='m-0'>¿No tiene una cuenta?</p>
+              <Link to='/register'>Registrese</Link>
+            </div>
+          }
+        >
           <div className='mb-3'>
             <label htmlFor='exampleFormControlInput1' className='form-label'>
               Correo
@@ -35,11 +40,7 @@ export const Login = () => {
           <div className='mb-3 d-flex justify-content-center'>
             <button className='btn btn-primary'>Iniciar Sesión</button>
           </div>
-        </div>
-        <div className='card-footer d-flex justify-content-center align-items-center gap-2'>
-          <p className='m-0'>¿No tiene una cuenta?</p>
-          <Link to='/register'>Registrese</Link>
-        </div>
+        </Card>
       </div>
     </div>
   )
