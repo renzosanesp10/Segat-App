@@ -1,8 +1,25 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Card } from '../components/Card'
+import { login } from '../functions/user'
 
 export const Login = () => {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setLoginData({ ...loginData, [name]: value })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    login(loginData.email, loginData.password)
+  }
+
   return (
     <div className='container_background'>
       <div className='w-25'>
@@ -15,31 +32,37 @@ export const Login = () => {
             </div>
           }
         >
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput1' className='form-label'>
-              Correo
-            </label>
-            <input
-              type='email'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='name@example.com'
-            />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor='exampleFormControlInput1' className='form-label'>
-              Contraseña
-            </label>
-            <input
-              type='password'
-              className='form-control'
-              id='exampleFormControlInput1'
-              placeholder='******'
-            />
-          </div>
-          <div className='mb-3 d-flex justify-content-center'>
-            <button className='btn btn-primary'>Iniciar Sesión</button>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className='mb-3'>
+              <label className='form-label'>
+                Correo
+                <input
+                  type='email'
+                  name='email'
+                  value={loginData.email}
+                  onChange={handleChange}
+                  className='form-control'
+                  placeholder='name@example.com'
+                />
+              </label>
+            </div>
+            <div className='mb-3'>
+              <label className='form-label'>
+                Contraseña
+                <input
+                  type='password'
+                  name='password'
+                  value={loginData.password}
+                  onChange={handleChange}
+                  className='form-control'
+                  placeholder='******'
+                />
+              </label>
+            </div>
+            <div className='mb-3 d-flex justify-content-center'>
+              <button className='btn btn-primary'>Iniciar Sesión</button>
+            </div>
+          </form>
         </Card>
       </div>
     </div>

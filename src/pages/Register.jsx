@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { Link } from 'react-router-dom'
 
 import { Card } from '../components/Card'
-import { AuthContext } from '../context/AuthContext'
+import { getDocuRef, register, saveInfo } from '../functions/user'
 
 export const Register = () => {
-  const { user, setUser, objUser } = useContext(AuthContext)
   const [registerInfo, setRegisterInfo] = useState({
     name: '',
     surname: '',
@@ -23,9 +23,10 @@ export const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      objUser.setData(registerInfo)
-      const userCredential = await objUser.register()
-      console.log(userCredential)
+      const info = await register(registerInfo.email, registerInfo.password)
+      const docuRef = getDocuRef(info.user.uid)
+      const { name, surname, dni, email, phone } = registerInfo
+      await saveInfo(docuRef, { name, surname, dni, email, phone })
     } catch (error) {
       console.error(error)
     }

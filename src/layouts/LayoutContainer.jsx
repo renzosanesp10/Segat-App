@@ -1,11 +1,11 @@
-import React from 'react'
 import { Navbar } from '../components/Navbar'
+import { Providers } from '../context/Providers'
 
-export const LayoutContainer = ({children}) => {
+export const LayoutContainer = ({ children }) => {
   return (
-    <>
-    <Navbar />
-    {children}
-    </>
+    <Providers>
+      <Navbar />
+      {children}
+    </Providers>
   )
 }
