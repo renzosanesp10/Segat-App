@@ -5,6 +5,7 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Registrohc } from './pages/Registrohc'
+import { ProtectedUser } from './routes/protectedUser'
 import { LayoutContainer } from './layouts/LayoutContainer'
 import { HechoContaminacion } from './pages/HechoContaminacion'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -17,7 +18,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <LayoutContainer>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route
+          path='/'
+          element={
+            <ProtectedUser>
+              <Home />
+            </ProtectedUser>
+          }
+        />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/hecho-contaminacion' element={<HechoContaminacion />} />

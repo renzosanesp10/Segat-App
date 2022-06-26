@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Card } from '../components/Card'
 import { login } from '../functions/user'
 
 export const Login = () => {
+  const navigate = useNavigate()
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -15,9 +16,13 @@ export const Login = () => {
     setLoginData({ ...loginData, [name]: value })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    login(loginData.email, loginData.password)
+    try {
+      await login(loginData.email, loginData.password)
+    } catch (error) {
+      console.log('error login', error.message)
+    }
   }
 
   return (
@@ -33,7 +38,7 @@ export const Login = () => {
           }
         >
           <form onSubmit={handleSubmit}>
-            <div className='mb-3'>
+            <div className='row mb-3'>
               <label className='form-label'>
                 Correo
                 <input
@@ -46,7 +51,7 @@ export const Login = () => {
                 />
               </label>
             </div>
-            <div className='mb-3'>
+            <div className='row mb-3'>
               <label className='form-label'>
                 Contraseña
                 <input

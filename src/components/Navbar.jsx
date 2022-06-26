@@ -4,7 +4,8 @@ import { AuthContext } from '../context/AuthContext'
 import { logout } from '../functions/user'
 
 export const Navbar = () => {
-  const { user } = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext)
+
   return (
     <nav
       className='navbar navbar-expand-lg navbar-dark bg-dark px-5 position-sticky top-0'
@@ -61,7 +62,7 @@ export const Navbar = () => {
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
-                  {user}
+                  {user && user.name}
                 </a>
                 <ul
                   className='dropdown-menu'

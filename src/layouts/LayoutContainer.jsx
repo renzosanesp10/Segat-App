@@ -1,5 +1,5 @@
 import { Navbar } from '../components/Navbar'
-import { Providers } from '../context/Providers'
+import { Providers } from './../context/Providers'
 
 export const LayoutContainer = ({ children }) => {
   return (
