@@ -1,18 +1,19 @@
 import { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Card } from '../components/Card'
 import { getDocuRef, register, saveInfo } from '../functions/user'
 
 export const Register = () => {
+  const navigate = useNavigate()
   const [registerInfo, setRegisterInfo] = useState({
     name: '',
     surname: '',
     dni: '',
     email: '',
     phone: '',
-    password: ''
+    password: '',
+    role: 'user'
   })
 
   const handleChange = e => {
@@ -24,9 +25,10 @@ export const Register = () => {
     e.preventDefault()
     try {
       const info = await register(registerInfo.email, registerInfo.password)
-      const docuRef = getDocuRef(info.user.uid)
-      const { name, surname, dni, email, phone } = registerInfo
-      await saveInfo(docuRef, { name, surname, dni, email, phone })
+      const docuRef = getDocuRef(info.user.uid, 'users')
+      const { name, surname, dni, email, phone, role } = registerInfo
+      await saveInfo(docuRef, { name, surname, dni, email, phone, role })
+      navigate('/hecho-contaminacion')
     } catch (error) {
       console.error(error)
     }

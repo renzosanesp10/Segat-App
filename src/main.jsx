@@ -18,18 +18,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <LayoutContainer>
       <Routes>
-        <Route
-          path='/'
-          element={
-            <ProtectedUser>
-              <Home />
-            </ProtectedUser>
-          }
-        />
+        <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/hecho-contaminacion' element={<HechoContaminacion />} />
-        <Route path='/Registro-hc' element={<Registrohc />} />
+        <Route path='/registro-hc' element={<Registrohc />} />
       </Routes>
     </LayoutContainer>
   </BrowserRouter>

@@ -9,11 +9,11 @@ const Provider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   const getUserData = async userFirebase => {
-    const docuRef = getDocuRef(userFirebase.uid)
+    const docuRef = getDocuRef(userFirebase.uid, 'users')
     const docSnap = await getDoc(docuRef)
     if (docSnap.exists()) {
-      const { name } = docSnap.data()
-      setUser({ name })
+      const { name, role } = docSnap.data()
+      setUser({ name, role })
       setLoading(false)
     } else {
       console.log('No hay documentos')

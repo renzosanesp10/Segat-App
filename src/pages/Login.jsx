@@ -1,8 +1,9 @@
+import { getDoc } from 'firebase/firestore'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Card } from '../components/Card'
-import { login } from '../functions/user'
+import { getDocuRef, login } from '../functions/user'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -19,7 +20,19 @@ export const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      await login(loginData.email, loginData.password)
+      const logedUser = await login(loginData.email, loginData.password)
+      const docuRef = getDocuRef(logedUser.user.uid, 'users')
+      const docSnap = await getDoc(docuRef)
+      if (docSnap.exists()) {
+        const { role } = docSnap.data()
+        if (role === 'admin') {
+          navigate('/registro-hc')
+        } else {
+          navigate('/hecho-contaminacion')
+        }
+      } else {
+        console.log('No hay documentos')
+      }
     } catch (error) {
       console.log('error login', error.message)
     }

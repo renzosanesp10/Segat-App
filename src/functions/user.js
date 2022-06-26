@@ -36,8 +36,8 @@ export const logout = () => {
   signOut(auth)
 }
 
-export const getDocuRef = id => {
-  return doc(store, 'users', id)
+export const getDocuRef = (id, document) => {
+  return doc(store, document, id)
 }
 
 export const saveInfo = async (docuRef, data) => {
