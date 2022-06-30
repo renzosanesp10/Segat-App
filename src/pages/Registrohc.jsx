@@ -11,7 +11,7 @@ export const Registrohc = () => {
   const [loading, setLoading] = useState(true)
   const [datatable, setDatatable] = useState({
     columns: [
-      {
+      /* {
         label: 'Nombres',
         field: 'name',
         attributes: {
@@ -30,7 +30,7 @@ export const Registrohc = () => {
       {
         label: 'Telefono',
         field: 'phone'
-      },
+      } ,*/
       {
         label: 'Distrito',
         field: 'distrito'
@@ -70,30 +70,18 @@ export const Registrohc = () => {
       hechos.push({ id: doc.id, data: doc.data() })
       setHechos(hechos.slice())
     })
+    setLoading(false)
   }
 
   useEffect(() => {
     getData()
-  }, [])
+    setDatatable({ ...datatable, rows: hechos.map(e => e.data) })
+  }, [loading])
 
-  /* const finalArray = hechos
-    .concat(users)
-    .map((el, i, self) => {
-      const existences = self.filter(obj => obj.id === el.id)
-      if (existences.length > 1) {
-        const $el = Object.assign({}, el, {
-          data: existences.map(obj => obj.data)
-        })
-        return $el
-      }
-    })
-    .filter((el, i, self) => el)
-    .filter((el, i, self) => self.findIndex($el => $el.id === el.id) === i)
-
-  setDatatable({ rows: finalArray[0]?.data[1] }) */
+  console.log(hechos)
 
   return (
-    <div className='d-flex mx-auto justify-content-center'>
+    <div className='w-75 d-flex mx-auto justify-content-center'>
       <MDBDataTableV5
         hover
         entriesOptions={[5, 20, 25]}

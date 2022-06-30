@@ -36,9 +36,9 @@ export const Navbar = () => {
         <ul className='navbar-nav ms-auto'>
           {!user ? (
             <>
-              <li className='nav-item active'>
+              <li className='nav-item'>
                 <Link className='nav-link' to='/login'>
-                  <span className='sr-only'>Iniciar sesión</span>
+                  Iniciar sesión
                 </Link>
               </li>
               <li className='nav-item'>
