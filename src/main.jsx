@@ -5,7 +5,6 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Registrohc } from './pages/Registrohc'
-import { ProtectedUser } from './routes/protectedUser'
 import { LayoutContainer } from './layouts/LayoutContainer'
 import { HechoContaminacion } from './pages/HechoContaminacion'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -13,6 +12,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './styles/globalStyles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
+
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import 'bootstrap-css-only/css/bootstrap.min.css'
+import 'mdbreact/dist/css/mdb.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>

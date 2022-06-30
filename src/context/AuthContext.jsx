@@ -13,7 +13,7 @@ const Provider = ({ children }) => {
     const docSnap = await getDoc(docuRef)
     if (docSnap.exists()) {
       const { name, role } = docSnap.data()
-      setUser({ name, role })
+      setUser({ name, role, uid: userFirebase.uid })
       setLoading(false)
     } else {
       console.log('No hay documentos')
